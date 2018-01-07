@@ -1,5 +1,7 @@
 package com.penguinwan.pattern.matcher
 
+import static com.penguinwan.pattern.matcher.MatcherFactory.*
+
 class MatcherTest extends spock.lang.Specification {
     void setup() {
     }
@@ -9,25 +11,44 @@ class MatcherTest extends spock.lang.Specification {
 
     def "able to answer when input match all predicate"() {
         given:
-//       Matcher matcher = new Matcher(
-//               Clause.ClauseBuilder.given(
-//                       left("name").operator(Operator.EQUALS).right("susi").build()
-//               ).then(
-//                       answer("age", "30")
-//               )
-//       )
-        Matcher matcher = new Matcher(
-                new Clause(
-                        new Answer("place", "igloo"),
-                        new Predicate("animal", "penguin"),
-                        new Predicate("time", "night")
+        Matcher matcher = newMatcher(
+                clause().given(
+                        predicate().left("animal").right("penguin").build(),
+                        predicate().left("time").right("night").build()
+                ).then(new Answer("place", "igloo"))
+        )
+
+        when:
+        Answer answer = matcher.match(new Input("animal", "penguin"), new Input("time", "night"))
+
+        then:
+        answer.value == "igloo"
+    }
+
+    def "able to answer correct when multiple clause"() {
+        given:
+        Matcher matcher = newMatcher(
+                clause().given(
+                        predicate().left("animal").right("penguin").build(),
+                        predicate().left("time").right("day").build()
+                ).then(
+                        new Answer("place", "sea")
+                ),
+                clause().given(
+                        predicate().left("animal").right("tiger").build(),
+                        predicate().left("time").right("day").build()
+                ).then(
+                        new Answer("place", "savannah")
+                ),
+                clause().given(
+                        predicate().left("animal").right("penguin").build(),
+                        predicate().left("time").right("night").build()
+                ).then(
+                        new Answer("place", "igloo")
                 )
         )
 
         when:
-//        List<Answer> answers = matcher.match(
-//                inputFor("name").is("susi")
-//        )
         Answer answer = matcher.match(new Input("animal", "penguin"), new Input("time", "night"))
 
         then:
@@ -36,12 +57,11 @@ class MatcherTest extends spock.lang.Specification {
 
     def "NO_MATCH when input match partial predicate"() {
         given:
-        Matcher matcher = new Matcher(
-                new Clause(
-                        new Answer("place", "igloo"),
-                        new Predicate("animal", "penguin"),
-                        new Predicate("time", "night")
-                )
+        Matcher matcher = newMatcher(
+                clause().given(
+                        predicate().left("animal").right("penguin").build(),
+                        predicate().left("time").right("night").build()
+                ).then(new Answer("place", "igloo"))
         )
 
         when:
@@ -53,12 +73,11 @@ class MatcherTest extends spock.lang.Specification {
 
     def "NO_MATCH when pass in partial input"() {
         given:
-        Matcher matcher = new Matcher(
-                new Clause(
-                        new Answer("place", "igloo"),
-                        new Predicate("animal", "penguin"),
-                        new Predicate("time", "night")
-                )
+        Matcher matcher = newMatcher(
+                clause().given(
+                        predicate().left("animal").right("penguin").build(),
+                        predicate().left("time").right("night").build()
+                ).then(new Answer("place", "igloo"))
         )
 
         when:

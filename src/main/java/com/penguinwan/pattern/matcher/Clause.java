@@ -1,24 +1,23 @@
 package com.penguinwan.pattern.matcher;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class Clause {
-    private List<Predicate> predicates = new ArrayList();
+    private List<Predicate> predicates;
 
     private Answer answer;
 
-    public Clause(Answer answer, Predicate... predicates) {
-        this.predicates.addAll(Arrays.asList(predicates));
+    Clause(List<Predicate> predicates, Answer answer) {
+        this.predicates = predicates;
         this.answer = answer;
     }
 
-    public List<Predicate> getPredicates() {
+    List<Predicate> getPredicates() {
         return predicates;
     }
 
-    public Answer getAnswer() {
+    Answer getAnswer() {
         return answer;
     }
+
 }

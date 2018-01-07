@@ -4,7 +4,7 @@ public class Predicate {
     private String left;
     private String right;
 
-    public Predicate(String left, String right) {
+    Predicate(String left, String right) {
         this.left = left;
         this.right = right;
     }

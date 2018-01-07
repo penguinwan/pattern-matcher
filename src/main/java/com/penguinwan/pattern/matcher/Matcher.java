@@ -7,7 +7,7 @@ import java.util.List;
 public class Matcher {
     private List<Clause> clauses = new ArrayList();
 
-    public Matcher(Clause... clauses) {
+    Matcher(Clause... clauses) {
         this.clauses.addAll(Arrays.asList(clauses));
     }
 
