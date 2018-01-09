@@ -1,12 +1,12 @@
-package com.penguinwan.pattern.matcher;
+package com.penguinwan.pattern.matcher
 
+import org.junit.AfterClass;
 import org.junit.Test
 
 import static com.penguinwan.pattern.matcher.MatcherFactory.clause
 import static com.penguinwan.pattern.matcher.MatcherFactory.newMatcher
 import static com.penguinwan.pattern.matcher.MatcherFactory.predicate;
 
-//TODO: this is not fair comparison, the first test always take longer time
 class MicroBenchmark {
     @Test
     void "normal"() {
@@ -80,5 +80,18 @@ class MicroBenchmark {
         }
         long endTime = System.currentTimeMillis()
         println(endTime - startTime)
+    }
+
+    @AfterClass
+    static void "final comparison"() {
+        MicroBenchmark instance = new MicroBenchmark()
+        println "most promising one"
+        instance."another functional"()
+        println "normal"
+        instance."normal"()
+        println "low performance"
+        instance."low performance"()
+        println "high performance"
+        instance."high performance"()
     }
 }
