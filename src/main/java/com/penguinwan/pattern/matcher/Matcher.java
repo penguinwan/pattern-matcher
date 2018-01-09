@@ -11,7 +11,7 @@ public class Matcher {
         this.clauses.addAll(Arrays.asList(clauses));
     }
 
-    public Answer match(Input... inputs) {
+    public Consequent match(Input... inputs) {
 
         for (Clause clause : clauses) {
             boolean allMatch = true;
@@ -30,11 +30,11 @@ public class Matcher {
             }
 
             if (allMatch && matchCount == clause.getConditions().size()) {
-                return clause.getAnswer();
+                return clause.getConsequent();
             }
         }
 
-        return Answer.NO_MATCH;
+        return Consequent.NO_MATCH;
     }
 
 }

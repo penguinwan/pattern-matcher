@@ -23,8 +23,8 @@ public class MatcherFactory {
             this.conditions.addAll(Arrays.asList(conditions));
             return this;
         }
-        public Clause then(Answer answer) {
-            return new Clause(conditions, answer);
+        public Clause then(Consequent consequent) {
+            return new Clause(conditions, consequent);
         }
     }
 

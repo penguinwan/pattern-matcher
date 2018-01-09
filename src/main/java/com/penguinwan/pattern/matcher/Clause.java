@@ -5,19 +5,19 @@ import java.util.List;
 public class Clause {
     private List<Condition> conditions;
 
-    private Answer answer;
+    private Consequent consequent;
 
-    Clause(List<Condition> conditions, Answer answer) {
+    Clause(List<Condition> conditions, Consequent consequent) {
         this.conditions = conditions;
-        this.answer = answer;
+        this.consequent = consequent;
     }
 
     List<Condition> getConditions() {
         return conditions;
     }
 
-    Answer getAnswer() {
-        return answer;
+    Consequent getConsequent() {
+        return consequent;
     }
 
 }
