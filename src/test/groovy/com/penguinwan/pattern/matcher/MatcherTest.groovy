@@ -13,8 +13,8 @@ class MatcherTest extends spock.lang.Specification {
         given:
         Matcher matcher = newMatcher(
                 clause().given(
-                        predicate().left("animal").right("penguin").build(),
-                        predicate().left("time").right("night").build()
+                        condition().subject("animal").value("penguin").build(),
+                        condition().subject("time").value("night").build()
                 ).then(new Answer("place", "igloo"))
         )
 
@@ -29,20 +29,20 @@ class MatcherTest extends spock.lang.Specification {
         given:
         Matcher matcher = newMatcher(
                 clause().given(
-                        predicate().left("animal").right("penguin").build(),
-                        predicate().left("time").right("day").build()
+                        condition().subject("animal").value("penguin").build(),
+                        condition().subject("time").value("day").build()
                 ).then(
                         new Answer("place", "sea")
                 ),
                 clause().given(
-                        predicate().left("animal").right("tiger").build(),
-                        predicate().left("time").right("day").build()
+                        condition().subject("animal").value("tiger").build(),
+                        condition().subject("time").value("day").build()
                 ).then(
                         new Answer("place", "savannah")
                 ),
                 clause().given(
-                        predicate().left("animal").right("penguin").build(),
-                        predicate().left("time").right("night").build()
+                        condition().subject("animal").value("penguin").build(),
+                        condition().subject("time").value("night").build()
                 ).then(
                         new Answer("place", "igloo")
                 )
@@ -59,8 +59,8 @@ class MatcherTest extends spock.lang.Specification {
         given:
         Matcher matcher = newMatcher(
                 clause().given(
-                        predicate().left("animal").right("penguin").build(),
-                        predicate().left("time").right("night").build()
+                        condition().subject("animal").value("penguin").build(),
+                        condition().subject("time").value("night").build()
                 ).then(new Answer("place", "igloo"))
         )
 
@@ -75,8 +75,8 @@ class MatcherTest extends spock.lang.Specification {
         given:
         Matcher matcher = newMatcher(
                 clause().given(
-                        predicate().left("animal").right("penguin").build(),
-                        predicate().left("time").right("night").build()
+                        condition().subject("animal").value("penguin").build(),
+                        condition().subject("time").value("night").build()
                 ).then(new Answer("place", "igloo"))
         )
 

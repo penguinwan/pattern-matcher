@@ -17,9 +17,9 @@ public class Matcher {
             boolean allMatch = true;
             int matchCount = 0;
             for (Input input : inputs) {
-                for (Predicate predicate : clause.getPredicates()) {
-                    if (predicate.getLeft().equals(input.getName())) {
-                        if (!predicate.getRight().equals(input.getValue())) {
+                for (Condition condition : clause.getConditions()) {
+                    if (condition.getSubject().equals(input.getName())) {
+                        if (!condition.getValue().equals(input.getValue())) {
                             allMatch = false;
                             break;
                         } else {
@@ -29,7 +29,7 @@ public class Matcher {
                 }
             }
 
-            if (allMatch && matchCount == clause.getPredicates().size()) {
+            if (allMatch && matchCount == clause.getConditions().size()) {
                 return clause.getAnswer();
             }
         }

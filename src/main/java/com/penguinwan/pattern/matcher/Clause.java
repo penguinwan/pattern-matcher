@@ -3,17 +3,17 @@ package com.penguinwan.pattern.matcher;
 import java.util.List;
 
 public class Clause {
-    private List<Predicate> predicates;
+    private List<Condition> conditions;
 
     private Answer answer;
 
-    Clause(List<Predicate> predicates, Answer answer) {
-        this.predicates = predicates;
+    Clause(List<Condition> conditions, Answer answer) {
+        this.conditions = conditions;
         this.answer = answer;
     }
 
-    List<Predicate> getPredicates() {
-        return predicates;
+    List<Condition> getConditions() {
+        return conditions;
     }
 
     Answer getAnswer() {

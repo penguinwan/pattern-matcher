@@ -13,37 +13,37 @@ public class MatcherFactory {
         return new ClauseBuilder();
     }
 
-    public static PredicateBuilder predicate() {
-        return new PredicateBuilder();
+    public static ConditionBuilder condition() {
+        return new ConditionBuilder();
     }
 
     static class ClauseBuilder {
-        private List<Predicate> predicates = new ArrayList<Predicate>();
-        public ClauseBuilder given(Predicate... predicates) {
-            this.predicates.addAll(Arrays.asList(predicates));
+        private List<Condition> conditions = new ArrayList<Condition>();
+        public ClauseBuilder given(Condition... conditions) {
+            this.conditions.addAll(Arrays.asList(conditions));
             return this;
         }
         public Clause then(Answer answer) {
-            return new Clause(predicates, answer);
+            return new Clause(conditions, answer);
         }
     }
 
-    static class PredicateBuilder {
-        private String left;
-        private String right;
+    static class ConditionBuilder {
+        private String subject;
+        private String value;
 
-        public PredicateBuilder left(String left) {
-            this.left = left;
+        public ConditionBuilder subject(String subject) {
+            this.subject = subject;
             return this;
         }
 
-        public PredicateBuilder right(String right) {
-            this.right = right;
+        public ConditionBuilder value(String value) {
+            this.value = value;
             return this;
         }
 
-        public Predicate build() {
-            return new Predicate(left, right);
+        public Condition build() {
+            return new Condition(subject, value);
         }
 
     }
