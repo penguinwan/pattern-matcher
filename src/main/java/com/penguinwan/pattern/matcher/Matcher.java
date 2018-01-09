@@ -1,9 +1,6 @@
 package com.penguinwan.pattern.matcher;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 public class Matcher {
     private List<Clause> clauses = new ArrayList();
@@ -102,6 +99,38 @@ public class Matcher {
 
         return Answer.NO_MATCH;
 
+    }
+
+    public Answer mostPromisingFunction(Input... inputs) {
+        java.util.function.Predicate andPredicate = null;
+
+        if(inputs.length != clauses.get(0).getPredicates().size()) {
+            return Answer.NO_MATCH;
+        }
+
+        for(Input input : inputs) {
+            java.util.function.Predicate<Clause> equalsPredicate = (clause) -> {
+                for(Predicate predicate : clause.getPredicates()) {
+                    if(predicate.getLeft().equalsIgnoreCase(input.getName())) {
+                        return predicate.getRight().equalsIgnoreCase(input.getValue());
+                    }
+                }
+                return false;
+            };
+
+            if(andPredicate == null) {
+                andPredicate = equalsPredicate;
+            } else {
+                andPredicate = andPredicate.and(equalsPredicate);
+            }
+        }
+
+        Optional<Clause> found = clauses.stream().filter(andPredicate).findFirst();
+        if(found.isPresent()) {
+            return found.get().getAnswer();
+        } else {
+            return Answer.NO_MATCH;
+        }
     }
 
 }

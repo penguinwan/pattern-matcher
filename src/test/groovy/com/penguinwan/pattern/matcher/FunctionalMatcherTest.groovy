@@ -2,7 +2,7 @@ package com.penguinwan.pattern.matcher
 
 import static com.penguinwan.pattern.matcher.MatcherFactory.*
 
-class MatcherTest extends spock.lang.Specification {
+class FunctionalMatcherTest extends spock.lang.Specification {
     void setup() {
     }
 
@@ -19,7 +19,7 @@ class MatcherTest extends spock.lang.Specification {
         )
 
         when:
-        Answer answer = matcher.match(new Input("animal", "penguin"), new Input("time", "night"))
+        Answer answer = matcher.mostPromisingFunction(new Input("animal", "penguin"), new Input("time", "night"))
 
         then:
         answer.value == "igloo"
@@ -49,7 +49,7 @@ class MatcherTest extends spock.lang.Specification {
         )
 
         when:
-        Answer answer = matcher.match(new Input("animal", "penguin"), new Input("time", "night"))
+        Answer answer = matcher.mostPromisingFunction(new Input("animal", "penguin"), new Input("time", "night"))
 
         then:
         answer.value == "igloo"
@@ -65,7 +65,7 @@ class MatcherTest extends spock.lang.Specification {
         )
 
         when:
-        Answer answer = matcher.match(new Input("animal", "penguin"), new Input("time", "day"))
+        Answer answer = matcher.mostPromisingFunction(new Input("animal", "penguin"), new Input("time", "day"))
 
         then:
         answer == Answer.NO_MATCH
@@ -81,7 +81,7 @@ class MatcherTest extends spock.lang.Specification {
         )
 
         when:
-        Answer answer = matcher.match(new Input("animal", "penguin"))
+        Answer answer = matcher.mostPromisingFunction(new Input("animal", "penguin"))
 
         then:
         answer == Answer.NO_MATCH
@@ -97,7 +97,7 @@ class MatcherTest extends spock.lang.Specification {
         )
 
         when:
-        Answer answer = matcher.match(new Input("animal", "penguin"), new Input("nonexistence", "a"))
+        Answer answer = matcher.mostPromisingFunction(new Input("animal", "penguin"), new Input("nonexistence", "a"))
 
         then:
         answer == Answer.NO_MATCH
