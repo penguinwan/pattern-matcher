@@ -55,6 +55,30 @@ class MatcherTest extends spock.lang.Specification {
         answer.value == "igloo"
     }
 
+    def "answer first found when multiple clause match"() {
+        given:
+        Matcher matcher = newMatcher(
+                clause().given(
+                        predicate().left("animal").right("penguin").build(),
+                        predicate().left("time").right("night").build()
+                ).then(
+                        new Answer("place", "igloo")
+                ),
+                clause().given(
+                        predicate().left("animal").right("penguin").build(),
+                        predicate().left("time").right("night").build()
+                ).then(
+                        new Answer("place", "savannah")
+                )
+        )
+
+        when:
+        Answer answer = matcher.match(new Input("animal", "penguin"), new Input("time", "night"))
+
+        then:
+        answer.value == "igloo"
+    }
+
     def "NO_MATCH when input match partial predicate"() {
         given:
         Matcher matcher = newMatcher(
