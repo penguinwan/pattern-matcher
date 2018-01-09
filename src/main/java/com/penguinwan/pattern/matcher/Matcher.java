@@ -11,15 +11,15 @@ public class Matcher {
         this.clauses.addAll(Arrays.asList(clauses));
     }
 
-    public Answer match(Input... inputs) {
+    public Consequent match(Input... inputs) {
 
         for (Clause clause : clauses) {
             boolean allMatch = true;
             int matchCount = 0;
             for (Input input : inputs) {
-                for (Predicate predicate : clause.getPredicates()) {
-                    if (predicate.getLeft().equals(input.getName())) {
-                        if (!predicate.getRight().equals(input.getValue())) {
+                for (Condition condition : clause.getConditions()) {
+                    if (condition.getSubject().equals(input.getName())) {
+                        if (!condition.getValue().equals(input.getValue())) {
                             allMatch = false;
                             break;
                         } else {
@@ -29,12 +29,12 @@ public class Matcher {
                 }
             }
 
-            if (allMatch && matchCount == clause.getPredicates().size()) {
-                return clause.getAnswer();
+            if (allMatch && matchCount == clause.getConditions().size()) {
+                return clause.getConsequent();
             }
         }
 
-        return Answer.NO_MATCH;
+        return Consequent.NO_MATCH;
     }
 
 }

@@ -13,13 +13,13 @@ class MatcherTest extends spock.lang.Specification {
         given:
         Matcher matcher = newMatcher(
                 clause().given(
-                        predicate().left("animal").right("penguin").build(),
-                        predicate().left("time").right("night").build()
-                ).then(new Answer("place", "igloo"))
+                        condition().subject("animal").value("penguin").build(),
+                        condition().subject("time").value("night").build()
+                ).then(new Consequent("place", "igloo"))
         )
 
         when:
-        Answer answer = matcher.match(new Input("animal", "penguin"), new Input("time", "night"))
+        Consequent answer = matcher.match(new Input("animal", "penguin"), new Input("time", "night"))
 
         then:
         answer.value == "igloo"
@@ -29,27 +29,27 @@ class MatcherTest extends spock.lang.Specification {
         given:
         Matcher matcher = newMatcher(
                 clause().given(
-                        predicate().left("animal").right("penguin").build(),
-                        predicate().left("time").right("day").build()
+                        condition().subject("animal").value("penguin").build(),
+                        condition().subject("time").value("day").build()
                 ).then(
-                        new Answer("place", "sea")
+                        new Consequent("place", "sea")
                 ),
                 clause().given(
-                        predicate().left("animal").right("tiger").build(),
-                        predicate().left("time").right("day").build()
+                        condition().subject("animal").value("tiger").build(),
+                        condition().subject("time").value("day").build()
                 ).then(
-                        new Answer("place", "savannah")
+                        new Consequent("place", "savannah")
                 ),
                 clause().given(
-                        predicate().left("animal").right("penguin").build(),
-                        predicate().left("time").right("night").build()
+                        condition().subject("animal").value("penguin").build(),
+                        condition().subject("time").value("night").build()
                 ).then(
-                        new Answer("place", "igloo")
+                        new Consequent("place", "igloo")
                 )
         )
 
         when:
-        Answer answer = matcher.match(new Input("animal", "penguin"), new Input("time", "night"))
+        Consequent answer = matcher.match(new Input("animal", "penguin"), new Input("time", "night"))
 
         then:
         answer.value == "igloo"
@@ -59,31 +59,31 @@ class MatcherTest extends spock.lang.Specification {
         given:
         Matcher matcher = newMatcher(
                 clause().given(
-                        predicate().left("animal").right("penguin").build(),
-                        predicate().left("time").right("night").build()
-                ).then(new Answer("place", "igloo"))
+                        condition().subject("animal").value("penguin").build(),
+                        condition().subject("time").value("night").build()
+                ).then(new Consequent("place", "igloo"))
         )
 
         when:
-        Answer answer = matcher.match(new Input("animal", "penguin"), new Input("time", "day"))
+        Consequent answer = matcher.match(new Input("animal", "penguin"), new Input("time", "day"))
 
         then:
-        answer == Answer.NO_MATCH
+        answer == Consequent.NO_MATCH
     }
 
     def "NO_MATCH when pass in partial input"() {
         given:
         Matcher matcher = newMatcher(
                 clause().given(
-                        predicate().left("animal").right("penguin").build(),
-                        predicate().left("time").right("night").build()
-                ).then(new Answer("place", "igloo"))
+                        condition().subject("animal").value("penguin").build(),
+                        condition().subject("time").value("night").build()
+                ).then(new Consequent("place", "igloo"))
         )
 
         when:
-        Answer answer = matcher.match(new Input("animal", "penguin"))
+        Consequent answer = matcher.match(new Input("animal", "penguin"))
 
         then:
-        answer == Answer.NO_MATCH
+        answer == Consequent.NO_MATCH
     }
 }

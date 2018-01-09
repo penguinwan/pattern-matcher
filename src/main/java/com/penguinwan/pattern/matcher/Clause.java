@@ -3,21 +3,21 @@ package com.penguinwan.pattern.matcher;
 import java.util.List;
 
 public class Clause {
-    private List<Predicate> predicates;
+    private List<Condition> conditions;
 
-    private Answer answer;
+    private Consequent consequent;
 
-    Clause(List<Predicate> predicates, Answer answer) {
-        this.predicates = predicates;
-        this.answer = answer;
+    Clause(List<Condition> conditions, Consequent consequent) {
+        this.conditions = conditions;
+        this.consequent = consequent;
     }
 
-    List<Predicate> getPredicates() {
-        return predicates;
+    List<Condition> getConditions() {
+        return conditions;
     }
 
-    Answer getAnswer() {
-        return answer;
+    Consequent getConsequent() {
+        return consequent;
     }
 
 }
