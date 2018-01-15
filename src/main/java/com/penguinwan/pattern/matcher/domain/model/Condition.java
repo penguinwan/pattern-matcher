@@ -1,4 +1,4 @@
-package com.penguinwan.pattern.matcher;
+package com.penguinwan.pattern.matcher.domain.model;
 
 public class Condition {
     private String subject;
