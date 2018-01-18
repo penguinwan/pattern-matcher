@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping default-access="field">
+    <class name="com.penguinwan.pattern.matcher.domain.model.Clause" table="CLAUSE">
+        <id name="id" type="long" column="ID">
+            <generator class="native" />
+        </id>
+        <list name="conditions" cascade="all" lazy="false">
+            <key column="CLAUSE_ID"/>
+            <list-index column="IDX"/>
+            <one-to-many class="com.penguinwan.pattern.matcher.domain.model.Condition" />
+        </list>
+        <one-to-one name="consequent" class="com.penguinwan.pattern.matcher.domain.model.Consequent"
+                    foreign-key="CONSEQUENT_ID" lazy="false" cascade="all" />
+    </class>
+</hibernate-mapping>

@@ -1,6 +1,6 @@
-package com.penguinwan.pattern.matcher
+package com.penguinwan.pattern.matcher.domain.model
 
-import static com.penguinwan.pattern.matcher.MatcherFactory.*
+import static com.penguinwan.pattern.matcher.domain.model.MatcherFactory.*
 
 class MatcherTest extends spock.lang.Specification {
     void setup() {
