@@ -1,14 +1,21 @@
 package com.penguinwan.pattern.matcher.domain.model;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
+
 
 public class Matcher {
+    private long id;
     private List<Clause> clauses = new ArrayList();
+
+    public Matcher() {
+    }
 
     Matcher(Clause... clauses) {
         this.clauses.addAll(Arrays.asList(clauses));
+    }
+
+    public long id() {
+        return id;
     }
 
     public Consequent match(Input... inputs) {
