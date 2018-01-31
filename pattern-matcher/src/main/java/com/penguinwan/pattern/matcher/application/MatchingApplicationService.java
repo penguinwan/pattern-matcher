@@ -34,22 +34,22 @@ public class MatchingApplicationService {
     }
 
     private static final class SetupCommandToDomainModelTranslator {
-        static Clause clause(SetupMatcherCommand.Clause clause) {
+        static Clause clause(com.penguinwan.matcher.shared.kernel.Clause clause) {
             return MatcherFactory.
                     clause().
                     given(SetupCommandToDomainModelTranslator.conditions(clause.getConditions())).
                     then(SetupCommandToDomainModelTranslator.consequent(clause.getConsequent()));
         }
 
-        static List<Condition> conditions(List<SetupMatcherCommand.Condition> conditions) {
+        static List<Condition> conditions(List<com.penguinwan.matcher.shared.kernel.Condition> conditions) {
             return conditions.stream().map(SetupCommandToDomainModelTranslator::condition).collect(Collectors.toList());
         }
 
-        static Condition condition(SetupMatcherCommand.Condition condition) {
+        static Condition condition(com.penguinwan.matcher.shared.kernel.Condition condition) {
             return MatcherFactory.condition().subject(condition.getSubject()).value(condition.getValue()).build();
         }
 
-        static Consequent consequent(SetupMatcherCommand.Consequent consequent) {
+        static Consequent consequent(com.penguinwan.matcher.shared.kernel.Consequent consequent) {
             return new Consequent(consequent.getSubject(), consequent.getValue());
         }
     }
