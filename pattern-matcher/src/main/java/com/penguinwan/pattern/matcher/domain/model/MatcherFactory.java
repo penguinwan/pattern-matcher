@@ -9,6 +9,10 @@ public class MatcherFactory {
         return new Matcher(clauses);
     }
 
+    public static Matcher newMatcher(List<Clause> clauses) {
+        return new Matcher(clauses);
+    }
+
     public static ClauseBuilder clause() {
         return new ClauseBuilder();
     }
@@ -17,20 +21,33 @@ public class MatcherFactory {
         return new ConditionBuilder();
     }
 
-    static class ClauseBuilder {
+    public static class ClauseBuilder {
         private List<Condition> conditions = new ArrayList<Condition>();
+
+        protected ClauseBuilder() {
+        }
+
         public ClauseBuilder given(Condition... conditions) {
             this.conditions.addAll(Arrays.asList(conditions));
             return this;
         }
+
+        public ClauseBuilder given(List<Condition> conditions) {
+            this.conditions.addAll(conditions);
+            return this;
+        }
+
         public Clause then(Consequent consequent) {
             return new Clause(conditions, consequent);
         }
     }
 
-    static class ConditionBuilder {
+    public static class ConditionBuilder {
         private String subject;
         private String value;
+
+        protected ConditionBuilder() {
+        }
 
         public ConditionBuilder subject(String subject) {
             this.subject = subject;

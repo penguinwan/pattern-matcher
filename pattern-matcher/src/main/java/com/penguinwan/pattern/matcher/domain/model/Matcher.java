@@ -14,6 +14,10 @@ public class Matcher {
         this.clauses.addAll(Arrays.asList(clauses));
     }
 
+    Matcher(List<Clause> clauses) {
+        this.clauses.addAll(clauses);
+    }
+
     public long id() {
         return id;
     }
