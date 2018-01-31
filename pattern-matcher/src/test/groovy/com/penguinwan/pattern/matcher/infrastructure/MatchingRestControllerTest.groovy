@@ -2,6 +2,7 @@ package com.penguinwan.pattern.matcher.infrastructure
 
 import com.penguinwan.pattern.matcher.application.MatcherNotFoundException
 import com.penguinwan.pattern.matcher.application.MatchingApplicationService
+import com.penguinwan.pattern.matcher.application.SetupMatcherCommand
 import com.penguinwan.pattern.matcher.domain.model.Consequent
 import org.glassfish.hk2.api.Factory
 import org.glassfish.hk2.utilities.binding.AbstractBinder
@@ -90,5 +91,15 @@ class MatchingRestControllerTest extends JerseyTest {
 
         assert response.status == 404
 
+    }
+
+    @Test
+    void "200 when setup valid matcher"() {
+        when(matchingApplicationService.setup(isNotNull(SetupMatcherCommand.class))).thenReturn(Long.valueOf(100))
+
+        Response response = target("matcher").request().put(Entity.entity(new SetupMatcherCommand(), MediaType.APPLICATION_JSON))
+
+        assert response.status == 200
+        assert response.readEntity(Long.class) == 100
     }
 }

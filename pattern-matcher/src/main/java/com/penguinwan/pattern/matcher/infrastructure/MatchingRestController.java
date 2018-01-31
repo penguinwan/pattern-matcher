@@ -2,6 +2,7 @@ package com.penguinwan.pattern.matcher.infrastructure;
 
 import com.penguinwan.pattern.matcher.application.MatcherNotFoundException;
 import com.penguinwan.pattern.matcher.application.MatchingApplicationService;
+import com.penguinwan.pattern.matcher.application.SetupMatcherCommand;
 import com.penguinwan.pattern.matcher.domain.model.Consequent;
 import com.penguinwan.pattern.matcher.domain.model.Input;
 
@@ -19,6 +20,13 @@ import java.util.stream.Collectors;
 public class MatchingRestController {
     @Inject
     private MatchingApplicationService matchingApplicationService;
+
+    @PUT
+    public Response setup(SetupMatcherCommand command) {
+        long id = matchingApplicationService.setup(command);
+
+        return Response.ok().entity(id).build();
+    }
 
     @POST
     @Path("{matcherId}")

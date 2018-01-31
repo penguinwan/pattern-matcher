@@ -1,9 +1,9 @@
 package com.penguinwan.pattern.matcher.application
 
-import com.penguinwan.pattern.matcher.domain.model.Consequent
 import com.penguinwan.pattern.matcher.domain.model.Input
 import com.penguinwan.pattern.matcher.domain.model.MatcherRepository
 import com.penguinwan.pattern.matcher.infrastructure.HibernateMatcherRepository
+import com.penguinwan.matcher.shared.kernel.*
 import org.hibernate.SessionFactory
 import org.hibernate.cfg.Configuration
 import org.junit.Before
@@ -23,21 +23,21 @@ class MatchingApplicationServiceTest {
 
     @Test
     void "able to setup and match"() {
-        SetupMatcherCommand.Clause clause1 = SetupMatcherCommand.Clause.of(
-                SetupMatcherCommand.Consequent.of('place', 'igloo'),
-                SetupMatcherCommand.Condition.of('animal', 'penguin'),
-                SetupMatcherCommand.Condition.of('time', 'night'))
-        SetupMatcherCommand.Clause clause2 = SetupMatcherCommand.Clause.of(
-                SetupMatcherCommand.Consequent.of('place', 'field'),
-                SetupMatcherCommand.Condition.of('animal', 'penguin'),
-                SetupMatcherCommand.Condition.of('time', 'day'))
+        Clause clause1 = Clause.of(
+                Consequent.of('place', 'igloo'),
+                Condition.of('animal', 'penguin'),
+                Condition.of('time', 'night'))
+        Clause clause2 = Clause.of(
+                Consequent.of('place', 'field'),
+                Condition.of('animal', 'penguin'),
+                Condition.of('time', 'day'))
 
         SetupMatcherCommand command = new SetupMatcherCommand()
         command.getClauses().add(clause1)
         command.getClauses().add(clause2)
 
         long matcherId = matchingApplicationService.setup(command)
-        Consequent consequent = matchingApplicationService.match(matcherId,
+        com.penguinwan.pattern.matcher.domain.model.Consequent consequent = matchingApplicationService.match(matcherId,
                 new Input('animal', 'penguin'),
                 new Input('time', 'night'))
 
